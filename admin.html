@@ -3,79 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin - Live Kamera</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
-
-        body {
-            background-color: #F4F6F8;
-            text-align: center;
-            padding-top: 50px;
-        }
-
-        .header {
-            background-color: #007AFF;
-            color: white;
-            padding: 15px;
-            font-size: 20px;
-            font-weight: bold;
-        }
-
-        .container {
-            margin-top: 20px;
-        }
-
-        video {
-            width: 100%;
-            max-width: 400px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .back-btn {
-            margin-top: 20px;
-            padding: 10px 20px;
-            background-color: red;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-    </style>
+    <title>Admin Panel</title>
 </head>
 <body>
-
-    <div class="header">Admin - Live Kamera</div>
-
-    <div class="container">
-        <video id="kameraAdmin" autoplay playsinline></video>
-    </div>
-
-    <button class="back-btn" onclick="window.location.href='index.html'">Kembali</button>
+    <h2>Live Camera Member</h2>
+    <video id="liveVideo" autoplay playsinline></video>
 
     <script>
-        async function tampilkanKamera() {
-            const kameraData = JSON.parse(localStorage.getItem("kameraStream"));
-            if (kameraData && kameraData.active) {
-                try {
-                    const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-                    document.getElementById('kameraAdmin').srcObject = stream;
-                } catch (error) {
-                    console.error("Gagal menampilkan kamera:", error);
-                }
-            } else {
-                alert("Kamera belum diaktifkan di halaman utama!");
-                window.location.href = "index.html";
+        const peer = new RTCPeerConnection();
+        const channel = new BroadcastChannel("kamera_stream");
+
+        peer.ontrack = (event) => {
+            document.getElementById("liveVideo").srcObject = event.streams[0];
+        };
+
+        // Terima permintaan streaming dari member
+        channel.onmessage = async (event) => {
+            if (event.data.type === "offer") {
+                await peer.setRemoteDescription(new RTCSessionDescription(event.data.offer));
+                const answer = await peer.createAnswer();
+                await peer.setLocalDescription(answer);
+                channel.postMessage({ type: "answer", answer });
             }
-        }
-
-        window.onload = tampilkanKamera;
+        };
     </script>
-
 </body>
 </html>
