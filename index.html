@@ -1,29 +1,19 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Splash Screen</title>
-    <style>
-        * { 
-            margin: 0; 
-            padding: 0; 
-            box-sizing: border-box; 
-        }
-        html, body {
-            height: 90px;
-            width: 100px;
-
-            background: url('Image/splash.png') no-repeat center center;
-            
-        }
-    </style>
-    <script>
-        setTimeout(() => {
-            window.location.href = 'nomber.html'; // Ganti dengan halaman tujuan
-        }, 3000);
-    </script>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <div class="splash-screen"></div>
+
+    <script>
+        // Fungsi untuk mengarahkan ke halaman berikutnya setelah 3 detik
+        setTimeout(function() {
+            window.location.href = "nomber.html"; // Ganti dengan halaman tujuanmu
+        }, 3000); // 3000ms = 3 detik
+    </script>
 </body>
 </html>
