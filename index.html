@@ -1,0 +1,28 @@
+<!DOCTYPE html><html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Splash Screen</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: url('splash.png') no-repeat center center/cover;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        .splash { text-align: center; }
+        .splash img { width: 150px; height: auto; margin-bottom: 20px; }
+        .splash p { font-size: 24px; }
+    </style>
+    <script>
+        setTimeout(() => {
+            window.location.href = 'nomber.html'; // Ganti dengan halaman tujuan
+        }, 3000); // Waktu dalam milidetik (3000ms = 3 detik)
+    </script>
+</head>
+<body>
+</html>
