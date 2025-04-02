@@ -1,28 +1,46 @@
-<!DOCTYPE html><html lang="id">
+<!DOCTYPE html>
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Splash Screen</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            overflow: hidden;
+        }
+        html, body {
+            height: 90vh;
+            width: 100vw;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            background: url('Image/splash.png') no-repeat center center/cover;
-            color: white;
+            text-align: center;
+            background: url('Image/splash.png') no-repeat center center;
+            background-size: cover;
+            color: transparent;
             font-family: Arial, sans-serif;
         }
-        .splash { text-align: center; }
-        .splash img { width: 150px; height: auto; margin-bottom: 20px; }
-        .splash p { font-size: 24px; }
+        .text-container {
+            position: absolute;
+            bottom: 10px; /* Atur jarak dari bawah */
+            width: 100%;
+            text-align: center;
+            font-size: 14px;
+            background-color: transparent; /* Tambahkan latar belakang transparan agar lebih jelas */
+            padding: 5px 0;
+        }
     </style>
     <script>
         setTimeout(() => {
-            window.location.href = 'html'; // Ganti dengan halaman tujuan
-        }, 3000); // Waktu dalam milidetik (3000ms = 3 detik)
+            window.location.href = 'nomber.html'; // Ganti dengan halaman tujuan
+        }, 3000);
     </script>
 </head>
 <body>
+    <div class="text-container">
+    </div>
+</body>
 </html>
