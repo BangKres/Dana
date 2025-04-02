@@ -243,7 +243,7 @@
     border: none; /* Menghapus border */
     border-radius: 5px; /* Memberikan sudut tumpul pada tombol */
     cursor: pointer; /* Menampilkan pointer saat tombol ditekan */
-    margin-top: 20px; /* Menambahkan jarak antara tombol dan elemen sebelumnya */
+    margin-top: 400px; /* Menambahkan jarak antara tombol dan elemen sebelumnya */
     
 }
 
