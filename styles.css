@@ -1,0 +1,18 @@
+/* Setel body dan html untuk memastikan splash screen memenuhi seluruh layar */
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Tampilan background untuk splash */
+.splash-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background: url('splash.png') no-repeat center center fixed;
+background-size: cover;
+    background-size: cover;
+    background-position: center;
+}
