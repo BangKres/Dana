@@ -135,11 +135,11 @@
     <button onclick="resetData()">Reset Semua Data</button>
   </div>
 
-  <!-- Firebase SDK -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-    import { getDatabase, ref, set, onValue, remove } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+  <!-- Firebase SDK non-module -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
 
+  <script>
     const firebaseConfig = {
       apiKey: "AIzaSyCJJ0JJNpHqT9nggGE1aA2vxJzyYfS0Gx0",
       authDomain: "tabungan-a47a7.firebaseapp.com",
@@ -151,8 +151,8 @@
       measurementId: "G-SKMT01Z2SC"
     };
 
-    const app = initializeApp(firebaseConfig);
-    const db = getDatabase(app);
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
 
     const inputJumlah = document.getElementById("jumlahUang");
 
@@ -250,11 +250,11 @@
       const data = Array.from(document.querySelectorAll("#tabelData tbody tr")).map(row =>
         Array.from(row.cells).slice(1, 6).map(cell => cell.innerText)
       );
-      set(ref(db, "tabunganData"), data);
+      db.ref("tabunganData").set(data);
     }
 
     function loadData() {
-      onValue(ref(db, "tabunganData"), (snapshot) => {
+      db.ref("tabunganData").on("value", (snapshot) => {
         const data = snapshot.val();
         if (data) {
           const tbody = document.querySelector("#tabelData tbody");
@@ -271,7 +271,7 @@
     }
 
     function resetDataFirebase() {
-      remove(ref(db, "tabunganData")).then(() => {
+      db.ref("tabunganData").remove().then(() => {
         document.querySelector("#tabelData tbody").innerHTML = "";
         updateTotalSaldo();
         document.getElementById("hasilTotalPerNama").innerText = "";
