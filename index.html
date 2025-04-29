@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title>Tabel Tabungan Mini</title>
+  <title>Tabungan Mini (Firebase)</title>
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -12,156 +12,81 @@
       color: #f0f0f0;
     }
 
-    .header {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      margin-bottom: 12px;
-    }
+    .header { display: flex; justify-content: space-between; margin-bottom: 12px; }
+    .saldo { font-weight: bold; font-size: 18px; color: #8bc34a; }
 
-    .saldo {
-      font-weight: bold;
-      font-size: 18px;
-      color: #8bc34a;
-    }
-
-    label {
-      font-weight: bold;
-    }
-
+    label { font-weight: bold; }
     select, input {
-      padding: 6px;
-      font-size: 14px;
-      border-radius: 8px;
-      border: 1px solid #555;
-      background: #2b2b2b;
-      color: #f0f0f0;
+      padding: 6px; font-size: 14px; border-radius: 8px; border: 1px solid #555;
+      background: #2b2b2b; color: #f0f0f0;
     }
-
-    select:focus, input:focus {
-      border-color: #888;
-      outline: none;
-    }
-
     .table-container {
-      max-height: 300px;
-      overflow-y: auto;
-      border: 1px solid #444;
-      border-radius: 6px;
-      background: #2a2a2a;
-      margin-bottom: 20px;
+      max-height: 300px; overflow-y: auto; border: 1px solid #444;
+      border-radius: 6px; background: #2a2a2a; margin-bottom: 20px;
     }
 
     table {
-      border-collapse: collapse;
-      width: 100%;
-      font-size: 12px;
-      text-align: center;
-      background-color: #2a2a2a;
-      color: #f0f0f0;
+      border-collapse: collapse; width: 100%; font-size: 12px;
+      text-align: center; background-color: #2a2a2a; color: #f0f0f0;
     }
 
-    th, td {
-      border: 1px solid #555;
-      padding: 8px 4px;
-      height: 12px;
-    }
-
+    th, td { border: 1px solid #555; padding: 8px 4px; height: 12px; }
     thead th {
-      background-color: #333;
-      position: sticky;
-      top: 0;
-      z-index: 2;
-      color: #f0f0f0;
+      background-color: #333; position: sticky; top: 0; z-index: 2; color: #f0f0f0;
     }
 
     .input-section {
-      margin-top: 10px;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
+      margin-top: 10px; display: flex; flex-wrap: wrap;
+      justify-content: center; gap: 10px;
     }
 
     button {
-      padding: 8px 14px;
-      font-size: 14px;
-      border: none;
-      border-radius: 6px;
-      background-color: #444;
-      color: #fff;
-      cursor: pointer;
-      transition: 0.3s;
+      padding: 8px 14px; font-size: 14px; border: none; border-radius: 6px;
+      background-color: #444; color: #fff; cursor: pointer; transition: 0.3s;
       box-shadow: 1px 1px 5px rgba(0,0,0,0.3);
     }
 
-    button:hover {
-      background-color: #666;
-      transform: scale(1.05);
-    }
+    button:hover { background-color: #666; transform: scale(1.05); }
 
     .hapus-button {
-      background-color: #e53935;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      padding: 2px 6px;
-      font-size: 12px;
-      cursor: pointer;
-      transition: 0.3s;
+      background-color: #e53935; color: white; border: none; border-radius: 4px;
+      padding: 2px 6px; font-size: 12px; cursor: pointer; transition: 0.3s;
     }
 
     .hapus-button:hover {
-      background-color: #c62828;
-      transform: scale(1.1);
+      background-color: #c62828; transform: scale(1.1);
     }
 
     .total-button-group {
-      display: flex;
-      gap: 10px;
-      justify-content: center;
-      width: 100%;
-      margin-top: 10px;
+      display: flex; gap: 10px; justify-content: center;
+      width: 100%; margin-top: 10px;
     }
 
     #hasilTotalPerNama {
-      margin-top: 16px;
-      font-weight: bold;
-      text-align: center;
-      color: #ccc;
+      margin-top: 16px; font-weight: bold; text-align: center; color: #ccc;
     }
 
     .bottom-button-container {
-      display: flex;
-      justify-content: center;
-      margin-top: 30px;
+      display: flex; justify-content: center; margin-top: 30px;
     }
 
     .bottom-button-container button {
-      background-color: #d32f2f;
-      font-weight: bold;
+      background-color: #d32f2f; font-weight: bold;
     }
 
     .bottom-button-container button:hover {
       background-color: #b71c1c;
     }
-   
-  .input-group {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
 
-  .input-group label {
-    min-width: 45px;
-    text-align: right;
-    font-weight: bold;
-  }
+    .input-group {
+      display: flex; align-items: center; gap: 8px;
+    }
 
-  .input-group select {
-    width: 160px;
-  }
+    .input-group label {
+      min-width: 45px; text-align: right; font-weight: bold;
+    }
 
+    .input-group select { width: 160px; }
   </style>
 </head>
 <body>
@@ -187,19 +112,17 @@
   </div>
 
   <div class="input-section">
-  <div class="input-group">
-    <label for="namaBawah">Nama:</label>
-    <select id="namaBawah">
-      <option value="Thelar">Thelar</option>
-      <option value="Saskia">Saskia</option>
-    </select>
+    <div class="input-group">
+      <label for="namaBawah">Nama:</label>
+      <select id="namaBawah">
+        <option value="Thelar">Thelar</option>
+        <option value="Saskia">Saskia</option>
+      </select>
+    </div>
+    <input type="text" id="jumlahUang" inputmode="numeric" placeholder="0">
+    <button onclick="tambahMasuk()">Tambah Masuk</button>
+    <button onclick="tambahKeluar()">Tambah Keluar</button>
   </div>
-
-  <input type="text" id="jumlahUang" inputmode="numeric" placeholder="0">
-
-  <button onclick="tambahMasuk()">Tambah Masuk</button>
-  <button onclick="tambahKeluar()">Tambah Keluar</button>
-</div>
 
   <div class="total-button-group">
     <button onclick="hitungTotal('Saskia')">Total Saskia</button>
@@ -212,7 +135,25 @@
     <button onclick="resetData()">Reset Semua Data</button>
   </div>
 
-  <script>
+  <!-- Firebase SDK -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getDatabase, ref, set, onValue, remove } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCJJ0JJNpHqT9nggGE1aA2vxJzyYfS0Gx0",
+      authDomain: "tabungan-a47a7.firebaseapp.com",
+      projectId: "tabungan-a47a7",
+      databaseURL: "https://tabungan-a47a7-default-rtdb.firebaseio.com",
+      storageBucket: "tabungan-a47a7.appspot.com",
+      messagingSenderId: "791266805531",
+      appId: "1:791266805531:web:766d3d235a96dd1b8075be",
+      measurementId: "G-SKMT01Z2SC"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
     const inputJumlah = document.getElementById("jumlahUang");
 
     inputJumlah.addEventListener("input", function () {
@@ -247,15 +188,9 @@
       }
 
       const tabel = document.getElementById("tabelData").getElementsByTagName("tbody")[0];
-      let barisKosong = Array.from(tabel.rows).find(row => row.cells[1].innerText === "");
-
-      if (!barisKosong) {
-        barisKosong = tabel.insertRow();
-        for (let i = 0; i < 6; i++) {
-          barisKosong.insertCell();
-        }
-        tambahButtonHapus(barisKosong);
-      }
+      let barisKosong = tabel.insertRow();
+      for (let i = 0; i < 6; i++) barisKosong.insertCell();
+      tambahButtonHapus(barisKosong);
 
       const today = new Date();
       const hari = today.toLocaleDateString('id-ID', { weekday: 'long' });
@@ -311,51 +246,52 @@
       document.getElementById("hasilTotalPerNama").innerText = `Total saldo ${namaCari}: ${formatAngka(total)}`;
     }
 
-    function resetData() {
-  const passwordBenar = "1234"; // Ganti dengan password yang kamu inginkan
-  const inputPassword = prompt("Masukkan password untuk menghapus semua data:");
-
-  if (inputPassword === null) return; // Batal
-
-  if (inputPassword !== passwordBenar) {
-    alert("Password salah!");
-    return;
-  }
-
-  if (confirm("Yakin ingin menghapus semua data?")) {
-    localStorage.removeItem("tabunganData");
-    document.querySelector("#tabelData tbody").innerHTML = "";
-    updateTotalSaldo();
-    document.getElementById("hasilTotalPerNama").innerText = "";
-  }
-}
-
     function saveData() {
       const data = Array.from(document.querySelectorAll("#tabelData tbody tr")).map(row =>
         Array.from(row.cells).slice(1, 6).map(cell => cell.innerText)
       );
-      localStorage.setItem("tabunganData", JSON.stringify(data));
+      set(ref(db, "tabunganData"), data);
     }
 
     function loadData() {
-      const data = JSON.parse(localStorage.getItem("tabunganData"));
-      if (data) {
-        const tbody = document.querySelector("#tabelData tbody");
-        tbody.innerHTML = "";
-        data.forEach(rowData => {
-          const row = tbody.insertRow();
-          for (let i = 0; i < 6; i++) {
-            row.insertCell();
-          }
-          tambahButtonHapus(row);
-          rowData.forEach((val, idx) => row.cells[idx + 1].innerText = val);
-        });
+      onValue(ref(db, "tabunganData"), (snapshot) => {
+        const data = snapshot.val();
+        if (data) {
+          const tbody = document.querySelector("#tabelData tbody");
+          tbody.innerHTML = "";
+          data.forEach(rowData => {
+            const row = tbody.insertRow();
+            for (let i = 0; i < 6; i++) row.insertCell();
+            tambahButtonHapus(row);
+            rowData.forEach((val, idx) => row.cells[idx + 1].innerText = val);
+          });
+          updateTotalSaldo();
+        }
+      });
+    }
+
+    function resetDataFirebase() {
+      remove(ref(db, "tabunganData")).then(() => {
+        document.querySelector("#tabelData tbody").innerHTML = "";
         updateTotalSaldo();
+        document.getElementById("hasilTotalPerNama").innerText = "";
+      });
+    }
+
+    function resetData() {
+      const passwordBenar = "1234";
+      const inputPassword = prompt("Masukkan password untuk menghapus semua data:");
+      if (inputPassword === null) return;
+      if (inputPassword !== passwordBenar) {
+        alert("Password salah!");
+        return;
+      }
+      if (confirm("Yakin ingin menghapus semua data?")) {
+        resetDataFirebase();
       }
     }
 
     window.onload = loadData;
   </script>
-
 </body>
 </html>
